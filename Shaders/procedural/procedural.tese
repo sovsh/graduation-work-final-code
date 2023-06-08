@@ -18,7 +18,7 @@ out float stem_thickness;
 
 const float PI = 3.1415926535897932384626433832795;
 float scaling_min = 0.5;
-float scaling_max = 0.9;
+float scaling_max = 0.8;
 float radius = 0.3;
 
 float random_range(vec3 v, float min, float max);
@@ -28,14 +28,12 @@ float noise(vec3 p);
 void main()
 {
     vec3 position;
-    vec2 p0 = vec2(0.0, 0.0);
-    vec2 p1 = vec2(0.0, 0.63);
-    vec2 p2 = vec2(0.53, 1.2);
-    vec2 p3 = vec2(1.0, 1.0);
+    vec2 p[4] = { vec2(0.0, 0.0), vec2(0.0, 0.63), vec2(0.53, 1.2), vec2(1.0, 1.0) };
     
     float t = gl_TessCoord.x; 
-    float d = 1.0 - t;
-    position.xy = p0 * d * d * d + 3.0 * p1 * d * d * t + 3.0 * p2 * t * t * d + p3 * t * t * t;
+    float d = t - 1.0;
+
+    position.xy = -p[0] * (d * d * d) + p[3] * (t * t * t) + p[1] * t * (d * d) * 3.0f - p[2] * (t * t) * d * 3.0f;
     position.z = 0.0;
 
     position.x += radius;
@@ -49,10 +47,10 @@ void main()
     
     position += gl_in[0].gl_Position.xyz;
 
-    normal.x = 3.0 * p0.y * d * d + 6.0 * p1.y * t * d + 3.0 * p1.y * d * d + 6.0 * p2.y * t * d + 3.0 * p2.y * t * t + 3.0 * p3.y * t * t;
-    normal.y = -(3.0 * p0.x * d * d + 6.0 * p1.x * t * d + 3.0 * p1.x * d * d + 6.0 * p2.x * t * d + 3.0 * p2.x * t * t + 3.0 * p3.x * t * t);
+    normal.x = -3.0 * p[0].y * (d * d) + 3.0 * p[1].y * (d * d) - 3.0 * p[2].y * (t * t) + 3.0 * p[3].y * (t * t) - 6.0 * p[2].y * t * d + 6.0 * p[1].y * t * d;
+    normal.y = -(-3.0 * p[0].x * (d * d) + 3.0 * p[1].x * (d * d) - 3.0 * p[2].x * (t * t) + 3.0 * p[3].x * (t * t) - 6.0 * p[2].x * t * d + 6.0 * p[1].x * t * d);
     normal.z = 0.0;
-    normal = rotation_y * normalize(normal);
+    normal = normalize(rotation_y * normal);
 
     binormal = rotation_y * vec3(0.0, 0.0, 1.0);   
 

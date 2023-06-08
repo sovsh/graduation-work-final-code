@@ -298,7 +298,7 @@ void init_grass()
 	float field_min = -19.5f;
 	float field_max = 19.5f;
 	int grass_min = 5;
-	int grass_max = 9;
+	int grass_max = 8;
 
 	grass = GrassModel("Models/Grass/Grass.png", grass_count, field_min, field_max, field_min, field_max, grass_min, grass_max);
 
@@ -309,7 +309,7 @@ void init_grass()
 	grass_ambient = glm::vec3(156.0f / 255, 222.0f / 255, 53.0f / 255);
 	grass_diffuse = glm::vec3(161.0f / 255, 238.0f / 255, 40.f / 255); 
 	grass_specular = glm::vec3(0.5f, 0.5f, 0.5f);
-	grass_shininess = 16.0f;//2.0f;
+	grass_shininess = 16.0f;
 }
 
 void init_vbos()

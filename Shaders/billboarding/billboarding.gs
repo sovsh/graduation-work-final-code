@@ -12,16 +12,14 @@ struct Wind
 
 uniform mat4 view;
 uniform mat4 projection;
-//uniform vec4 camera_right;
-//uniform vec4 camera_up;
 uniform float frame;
 uniform Wind wind;
 
 out vec2 fragment_texture;
 
 const float PI = 3.141592653589793;
-float scaling_min = 1.1;
-float scaling_max = 1.7;
+float scaling_min = 0.9;
+float scaling_max = 1.5;
 
 mat3 create_rotation_x_matrix(float angle);
 mat3 create_rotation_z_matrix(float angle);
