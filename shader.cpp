@@ -80,6 +80,8 @@ void Shader::use() { glUseProgram(this->shader_program); }
 
 void Shader::unuse() { glUseProgram(0); }
 
+void Shader::delete_program() { glDeleteProgram(this->shader_program); }
+
 GLuint Shader::get_attribute_position(const GLchar* name)
 {
     GLuint attribute = glGetAttribLocation(this->shader_program, name);

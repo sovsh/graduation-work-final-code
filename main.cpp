@@ -125,7 +125,13 @@ int main()
 		window.display();
 	}
 
-	// Delete program and vaos
+	glDeleteBuffers(1, &field_vao); 
+	glDeleteBuffers(1, &grass_proc_vao);
+	glDeleteBuffers(1, &grass_bil_vao);
+
+	shader_model.delete_program();
+	shader_grass_proc.delete_program();
+	shader_grass_bil.delete_program();
 
 	return 0;
 }

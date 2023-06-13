@@ -35,6 +35,7 @@ public:
 
 	void use();
 	void unuse();
+	void delete_program();
 
 	GLuint get_attribute_position(const GLchar* name);
 
